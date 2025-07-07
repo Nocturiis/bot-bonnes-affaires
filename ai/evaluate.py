@@ -1,4 +1,4 @@
-from mistralai.client import Mistral
+from mistralai import Mistral
 # importez seulement ce dont vous avez besoin : pas de ChatMessage explicitement
 import os
 import json
