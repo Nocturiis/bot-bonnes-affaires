@@ -1,4 +1,4 @@
-from mistralai.client import MistralClient
+from mistralai.client import Mistral
 # importez seulement ce dont vous avez besoin : pas de ChatMessage explicitement
 import os
 import json
@@ -8,7 +8,7 @@ def evaluate_car_ad(title, description, price, mileage, year, model, brand, fuel
     if not api_key:
         raise ValueError("La variable d'environnement MISTRAL_API_KEY n'est pas définie.")
 
-    client = MistralClient(api_key=api_key)
+    client = Mistral(api_key=api_key)
 
     # Nettoyer et préparer les entrées pour le prompt
     description_clean = description if description else "Aucune description fournie."
