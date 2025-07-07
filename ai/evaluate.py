@@ -1,9 +1,9 @@
 from mistralai.client import MistralClient
-from mistralai.models.chat_completion import ChatMessage
+# importez seulement ce dont vous avez besoin : pas de ChatMessage explicitement
 import os
 import json
 
-def evaluate_car_ad(title, description, price, mileage, year, model, brand, fuel_type='N/A', transmission='N/A', body_type='N/A'): # Ajout des nouveaux arguments
+def evaluate_car_ad(title, description, price, mileage, year, model, brand, fuel_type='N/A', transmission='N/A', body_type='N/A'):
     api_key = os.environ.get("MISTRAL_API_KEY")
     if not api_key:
         raise ValueError("La variable d'environnement MISTRAL_API_KEY n'est pas définie.")
@@ -52,12 +52,13 @@ def evaluate_car_ad(title, description, price, mileage, year, model, brand, fuel
     """
 
     messages = [
-        ChatMessage(role="user", content=prompt)
+        # Utilisation d'un dictionnaire simple pour le message
+        {"role": "user", "content": prompt}
     ]
 
     try:
-        chat_response = client.chat(
-            model="mistral-large-latest", # Ou "mistral-medium" ou "mixtral-8x7b-instruct-v0.1"
+        chat_response = client.chat.complete( # Utilisez client.chat.complete() comme dans la doc
+            model="mistral-large-latest",
             response_format={"type": "json_object"},
             messages=messages
         )
@@ -65,11 +66,10 @@ def evaluate_car_ad(title, description, price, mileage, year, model, brand, fuel
         return json.loads(content)
     except Exception as e:
         print(f"Erreur lors de l'appel à l'API Mistral : {e}")
-        # Retourne une valeur par défaut ou une erreur si l'appel à l'IA échoue
         return {"note": 0, "commentaire": "Erreur lors de l'analyse IA."}
 
 if __name__ == '__main__':
-    # Exemple d'utilisation
+    # ... (Votre exemple d'utilisation reste le même, il appelle juste la fonction evaluate_car_ad)
     example_ad = {
         "title": "Honda Civic 1.8 i-VTEC Sport, boîte auto",
         "description": "Belle Civic à vendre, faible consommation, carnet d'entretien complet. Quelques petites rayures.",
