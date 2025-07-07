@@ -2,4 +2,4 @@ requests
 beautifulsoup4
 python-dotenv
 python-telegram-bot
-mistralai
+mistralai==0.4.2
