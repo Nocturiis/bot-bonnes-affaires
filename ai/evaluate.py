@@ -1,14 +1,14 @@
-from mistralai import Mistral
+from MistralClientai import MistralClient
 # importez seulement ce dont vous avez besoin : pas de ChatMessage explicitement
 import os
 import json
 
 def evaluate_car_ad(title, description, price, mileage, year, model, brand, fuel_type='N/A', transmission='N/A', body_type='N/A'):
-    api_key = os.environ.get("MISTRAL_API_KEY")
+    api_key = os.environ.get("MistralClient_API_KEY")
     if not api_key:
-        raise ValueError("La variable d'environnement MISTRAL_API_KEY n'est pas définie.")
+        raise ValueError("La variable d'environnement MistralClient_API_KEY n'est pas définie.")
 
-    client = Mistral(api_key=api_key)
+    client = MistralClient(api_key=api_key)
 
     # Nettoyer et préparer les entrées pour le prompt
     description_clean = description if description else "Aucune description fournie."
@@ -58,14 +58,14 @@ def evaluate_car_ad(title, description, price, mileage, year, model, brand, fuel
 
     try:
         chat_response = client.chat.complete( # Utilisez client.chat.complete() comme dans la doc
-            model="mistral-large-latest",
+            model="MistralClient-large-latest",
             response_format={"type": "json_object"},
             messages=messages
         )
         content = chat_response.choices[0].message.content
         return json.loads(content)
     except Exception as e:
-        print(f"Erreur lors de l'appel à l'API Mistral : {e}")
+        print(f"Erreur lors de l'appel à l'API MistralClient : {e}")
         return {"note": 0, "commentaire": "Erreur lors de l'analyse IA."}
 
 if __name__ == '__main__':
