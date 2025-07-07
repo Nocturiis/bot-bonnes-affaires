@@ -1,13 +1,15 @@
 import os
 import json
-from mistralai.client import MistralClient # <-- CORRECTION ICI : le module est 'mistralai.client'
+# NOUVELLE IMPORTATION POUR LA DERNIÈRE VERSION
+from mistralai.client import MistralClient # Revenir à client, pas package racine Mistral
+from mistralai.models.chat_completion import ChatMessage # Importer ChatMessage pour plus de clarté
 
 def evaluate_car_ad(title, description, price, mileage, year, model, brand, fuel_type='N/A', transmission='N/A', body_type='N/A'):
     api_key = os.environ.get("MISTRAL_API_KEY")
     if not api_key:
         raise ValueError("La variable d'environnement MISTRAL_API_KEY n'est pas définie.")
 
-    client = MistralClient(api_key=api_key)
+    client = MistralClient(api_key=api_key) # Initialisation du client
 
     # Nettoyer et préparer les entrées pour le prompt
     description_clean = description if description else "Aucune description fournie."
@@ -16,7 +18,6 @@ def evaluate_car_ad(title, description, price, mileage, year, model, brand, fuel
     price_clean = f"Prix: {price}" if price and str(price).strip() != 'N/A' else "Prix non spécifié."
     model_brand_clean = f"Modèle: {model}, Marque: {brand}" if model and brand else ""
 
-    # Nouvelles informations pour le prompt
     fuel_type_clean = f"Type de carburant: {fuel_type}" if fuel_type and str(fuel_type).strip() != 'N/A' else ""
     transmission_clean = f"Transmission: {transmission}" if transmission and str(transmission).strip() != 'N/A' else ""
     body_type_clean = f"Type de carrosserie: {body_type}" if body_type and str(body_type).strip() != 'N/A' else ""
@@ -40,7 +41,7 @@ def evaluate_car_ad(title, description, price, mileage, year, model, brand, fuel
     {body_type_clean}
 
     Note de 1 (arnaque probable / très mauvaise affaire) à 5 (excellente affaire / coup de fusil), puis justifie en 2 lignes.
-    Retourne la réponse au format JSON strict :
+    Retourne la réponse au format JSON strict (ne mets rien d'autre que le JSON):
     ```json
     {{
       "note": [1-5],
@@ -50,23 +51,33 @@ def evaluate_car_ad(title, description, price, mileage, year, model, brand, fuel
     """
 
     messages = [
-        {"role": "user", "content": prompt}
+        # Utilisation de ChatMessage pour plus de robustesse avec les nouvelles versions
+        ChatMessage(role="user", content=prompt)
     ]
 
     try:
-        chat_response = client.chat( # Laissez client.chat() comme précédemment pour la 0.4.2
-            model="mistral-large-latest",
-            #response_format={"type": "json_object"}, # Commenté car potentiellement non dispo en 0.4.2
+        # Revenir à client.chat.completions pour les nouvelles versions
+        chat_response = client.chat.completions.create( # Nouvelle méthode pour les versions > 0.5
+            model="mistral-tiny",
+            response_format={"type": "json_object"}, # Cette option devrait fonctionner maintenant
             messages=messages
         )
+
         content = chat_response.choices[0].message.content
+        # La bibliothèque est censée déjà valider le JSON avec response_format={"type": "json_object"}
+        # Mais on garde le json.loads() au cas où et pour avoir un dict.
         return json.loads(content)
+
+    # La gestion des exceptions est plus fine avec les nouvelles versions de la lib
     except Exception as e:
+        # Pour le débogage, imprimez l'erreur complète
+        import traceback
+        traceback.print_exc() 
         print(f"Erreur lors de l'appel à l'API Mistral : {e}")
-        return {"note": 0, "commentaire": "Erreur lors de l'analyse IA."}
+        return {"note": 0, "commentaire": "Erreur lors de l'analyse IA ou de la réponse JSON."}
 
 if __name__ == '__main__':
-    # Test local
+    # ... (Votre bloc de test local reste inchangé) ...
     example_ad = {
         "title": "Honda Civic 1.8 i-VTEC Sport, boîte auto",
         "description": "Belle Civic à vendre, faible consommation, carnet d'entretien complet. Quelques petites rayures.",
@@ -87,8 +98,8 @@ if __name__ == '__main__':
         example_ad['year'],
         example_ad['model'],
         example_ad['brand'],
-        example_ad['fuel_type'],
-        example_ad['transmission'],
-        example_ad['body_type']
+        fuel_type=example_ad['fuel_type'],
+        transmission=example_ad['transmission'],
+        body_type=example_ad['body_type']
     )
     print(ai_result)
