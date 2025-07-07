@@ -31,7 +31,13 @@ def scrape_2ememain_honda_civic(url="https://www.2ememain.be/l/autos/honda/f/civ
             return []
 
         for ad_link in car_ad_links:
-            full_url = "https://www.2ememain.be" + ad_link.get('href')
+            # --- MODIFICATION ICI : Vérifier si 'href' existe ---
+            href = ad_link.get('href')
+            if not href:
+                print(f"Avertissement : Lien d'annonce trouvé sans attribut 'href'. Ignoré. (HTML partiel : {ad_link.prettify()[:200]}...)")
+                continue # Passer à l'itération suivante si pas de href
+
+            full_url = "https://www.2ememain.be" + href
 
             if full_url in seen_urls:
                 continue
@@ -53,7 +59,7 @@ def scrape_2ememain_honda_civic(url="https://www.2ememain.be/l/autos/honda/f/civ
             year = 'N/A'
             mileage = 'N/A'
             fuel_type = 'N/A'
-            transmission = 'N/A' # Initialiser à 'N/A'
+            transmission = 'N/A'
             body_type = 'N/A'
 
             if attributes_container:
@@ -62,13 +68,12 @@ def scrape_2ememain_honda_civic(url="https://www.2ememain.be/l/autos/honda/f/civ
                     icon_class = attr.find('i')
                     if icon_class:
                         icon_classes = icon_class.get('class', [])
-                        attr_text_raw = attr.get_text(strip=True) # Récupérer le texte brut
-                        attr_text = attr_text_raw if attr_text_raw else 'N/A' # S'assurer qu'il n'est pas vide ou None
+                        attr_text_raw = attr.get_text(strip=True)
+                        attr_text = attr_text_raw if attr_text_raw else 'N/A'
 
                         if 'hz-SvgIconCarConstructionYear' in icon_classes:
                             year = attr_text
                         elif 'hz-SvgIconCarMileage' in icon_classes:
-                            # Utiliser attr_text qui est garanti non-None
                             mileage = attr_text.replace('km', '').replace('.', '').replace(',', '').strip()
                         elif 'hz-SvgIconCarFuel' in icon_classes:
                             fuel_type = attr_text
@@ -103,3 +108,12 @@ def scrape_2ememain_honda_civic(url="https://www.2ememain.be/l/autos/honda/f/civ
 
     print(f"Scraping terminé. {len(listings)} annonces de Honda Civic trouvées.")
     return listings
+
+if __name__ == '__main__':
+    import json # Nécessaire pour le test local
+    print("Test local du scraper 2ememain.be pour Honda Civic...")
+    honda_civic_listings = scrape_2ememain_honda_civic()
+    for listing in honda_civic_listings[:5]:
+        print(json.dumps(listing, indent=2, ensure_ascii=False))
+
+    print(f"\nScraping de {len(honda_civic_listings)} annonces de Honda Civic effectué.")
