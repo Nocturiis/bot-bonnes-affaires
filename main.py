@@ -4,7 +4,7 @@ from dotenv import load_dotenv
 
 from ai.evaluate import evaluate_car_ad
 from notify.telegram_bot import send_telegram_message
-from scraper.scrape_2ememain import scrape_2ememain_honda_civic, scrape_single_ad_details
+from scraper.scrape_2ememain import scrape_2ememain_honda_civic
 
 # Charger les variables d'environnement du fichier .env (pour les tests locaux)
 load_dotenv()
