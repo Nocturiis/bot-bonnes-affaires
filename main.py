@@ -14,8 +14,12 @@ SEEN_ADS_FILE = 'data/annonces_vues.json'
 
 def load_seen_ads():
     if os.path.exists(SEEN_ADS_FILE):
-        with open(SEEN_ADS_FILE, 'r', encoding='utf-8') as f:
-            return json.load(f)
+        try:
+            with open(SEEN_ADS_FILE, 'r', encoding='utf-8') as f:
+                return json.load(f)
+        except json.JSONDecodeError:
+            print(f"Attention: Le fichier {SEEN_ADS_FILE} est corrompu ou vide. Création d'une nouvelle liste.")
+            return []
     return []
 
 def save_seen_ads(ads):
@@ -29,32 +33,50 @@ def main():
 
     # 1. Scraping
     print("Scraping des Honda Civic sur 2ememain.be...")
-    raw_listings = scrape_2ememain_honda_civic() # Appel à la nouvelle fonction
+    raw_listings = scrape_2ememain_honda_civic()
     print(f"Trouvé {len(raw_listings)} annonces de Honda Civic.")
 
     for listing in raw_listings:
         ad_url = listing.get('url')
-        if not ad_url or ad_url in [ad['url'] for ad in seen_ads]:
-            print(f"Ignorons l'annonce déjà vue ou invalide : {listing.get('title', 'N/A')}")
+        if not ad_url:
+            print(f"Ignorons l'annonce sans URL : {listing.get('title', 'N/A')}")
+            continue
+        
+        # Vérifier si l'annonce a déjà été vue en comparant l'URL
+        # On crée une liste des URLs des annonces déjà vues pour une recherche rapide
+        seen_urls_list = [ad.get('url') for ad in seen_ads if ad.get('url')]
+        if ad_url in seen_urls_list:
+            print(f"Ignorons l'annonce déjà vue : {listing.get('title', 'N/A')}")
             continue
 
         new_ads_count += 1
         print(f"Traitement de la nouvelle annonce : {listing.get('title', 'N/A')} à {ad_url}")
 
-        # Les détails sont déjà dans 'listing' grâce au scraper amélioré,
-        # donc pas besoin d'appeler scrape_single_ad_details ici.
+        # --- NOUVELLE IMPLÉMENTATION ICI : Affichage des informations extraites ---
+        print("\n--- Informations extraites de l'annonce ---")
+        print(f"  Titre: {listing.get('title', 'N/A')}")
+        print(f"  URL: {listing.get('url', 'N/A')}")
+        print(f"  Prix: {listing.get('price', 'N/A')}")
+        print(f"  Kilométrage: {listing.get('mileage', 'N/A')} km")
+        print(f"  Année: {listing.get('year', 'N/A')}")
+        print(f"  Carburant: {listing.get('fuel_type', 'N/A')}")
+        print(f"  Transmission: {listing.get('transmission', 'N/A')}")
+        print(f"  Carrosserie: {listing.get('body_type', 'N/A')}")
+        # Affiche seulement les 200 premiers caractères de la description pour ne pas surcharger les logs
+        print(f"  Description: {listing.get('description', 'N/A')[:200]}...") 
+        print("----------------------------------------\n")
+        # --- FIN DE LA NOUVELLE IMPLÉMENTATION ---
 
-        # Pré-traitement/normalisation
+        # Pré-traitement/normalisation - Ces variables sont déjà extraites et nettoyées par le scraper
         title = listing.get('title', 'N/A')
         description = listing.get('description', 'N/A')
-        price = listing.get('price', 'N/A') # Le nettoyage du prix est déjà fait dans le scraper
-        mileage = listing.get('mileage', 'N/A') # Nettoyé dans le scraper
-        year = listing.get('year', 'N/A') # Nettoyé dans le scraper
-        brand = listing.get('brand', 'Honda') # Vient du scraper
-        model = listing.get('model', 'Civic') # Vient du scraper
-        city = listing.get('city', 'N/A') # Si pas scrapé sur la liste, reste N/A
+        price = listing.get('price', 'N/A')
+        mileage = listing.get('mileage', 'N/A')
+        year = listing.get('year', 'N/A')
+        brand = listing.get('brand', 'Honda')
+        model = listing.get('model', 'Civic')
+        city = listing.get('city', 'N/A')
 
-        # Nouvelles données extraites:
         fuel_type = listing.get('fuel_type', 'N/A')
         transmission = listing.get('transmission', 'N/A')
         body_type = listing.get('body_type', 'N/A')
@@ -70,7 +92,7 @@ def main():
             year,
             model,
             brand,
-            fuel_type=fuel_type, # Passer les nouvelles informations à l'IA
+            fuel_type=fuel_type,
             transmission=transmission,
             body_type=body_type
         )
@@ -98,7 +120,7 @@ def main():
 
         # Add the processed ad to seen_ads to avoid reprocessing
         seen_ads.append(listing)
-        save_seen_ads(seen_ads) # Save after each new ad to prevent data loss on crash
+        save_seen_ads(seen_ads) # Sauvegarder après chaque nouvelle annonce pour éviter la perte de données en cas de crash
 
     if new_ads_count == 0:
         print("Aucune nouvelle annonce à traiter.")
