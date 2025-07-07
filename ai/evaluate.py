@@ -1,27 +1,25 @@
-from MistralClientai import MistralClient
-# importez seulement ce dont vous avez besoin : pas de ChatMessage explicitement
 import os
 import json
+from mistralai.client import MistralClient # <-- CORRECTION ICI : le module est 'mistralai.client'
 
 def evaluate_car_ad(title, description, price, mileage, year, model, brand, fuel_type='N/A', transmission='N/A', body_type='N/A'):
-    api_key = os.environ.get("MistralClient_API_KEY")
+    api_key = os.environ.get("MISTRAL_API_KEY")
     if not api_key:
-        raise ValueError("La variable d'environnement MistralClient_API_KEY n'est pas définie.")
+        raise ValueError("La variable d'environnement MISTRAL_API_KEY n'est pas définie.")
 
     client = MistralClient(api_key=api_key)
 
     # Nettoyer et préparer les entrées pour le prompt
     description_clean = description if description else "Aucune description fournie."
-    mileage_clean = f"{mileage} km" if mileage and mileage != 'N/A' else "Kilométrage non spécifié."
-    year_clean = f"Année: {year}" if year and year != 'N/A' else "Année non spécifiée."
-    price_clean = f"Prix: {price}" if price and price != 'N/A' else "Prix non spécifié."
+    mileage_clean = f"{mileage} km" if mileage and str(mileage).strip() != 'N/A' else "Kilométrage non spécifié."
+    year_clean = f"Année: {year}" if year and str(year).strip() != 'N/A' else "Année non spécifiée."
+    price_clean = f"Prix: {price}" if price and str(price).strip() != 'N/A' else "Prix non spécifié."
     model_brand_clean = f"Modèle: {model}, Marque: {brand}" if model and brand else ""
 
     # Nouvelles informations pour le prompt
-    fuel_type_clean = f"Type de carburant: {fuel_type}" if fuel_type != 'N/A' else ""
-    transmission_clean = f"Transmission: {transmission}" if transmission != 'N/A' else ""
-    body_type_clean = f"Type de carrosserie: {body_type}" if body_type != 'N/A' else ""
-
+    fuel_type_clean = f"Type de carburant: {fuel_type}" if fuel_type and str(fuel_type).strip() != 'N/A' else ""
+    transmission_clean = f"Transmission: {transmission}" if transmission and str(transmission).strip() != 'N/A' else ""
+    body_type_clean = f"Type de carrosserie: {body_type}" if body_type and str(body_type).strip() != 'N/A' else ""
 
     prompt = f"""
     Voici une annonce de vente de voiture d'occasion. Évalue-la selon ces critères :
@@ -52,24 +50,23 @@ def evaluate_car_ad(title, description, price, mileage, year, model, brand, fuel
     """
 
     messages = [
-        # Utilisation d'un dictionnaire simple pour le message
         {"role": "user", "content": prompt}
     ]
 
     try:
-        chat_response = client.chat.complete( # Utilisez client.chat.complete() comme dans la doc
-            model="MistralClient-large-latest",
-            response_format={"type": "json_object"},
+        chat_response = client.chat( # Laissez client.chat() comme précédemment pour la 0.4.2
+            model="mistral-large-latest",
+            #response_format={"type": "json_object"}, # Commenté car potentiellement non dispo en 0.4.2
             messages=messages
         )
         content = chat_response.choices[0].message.content
         return json.loads(content)
     except Exception as e:
-        print(f"Erreur lors de l'appel à l'API MistralClient : {e}")
+        print(f"Erreur lors de l'appel à l'API Mistral : {e}")
         return {"note": 0, "commentaire": "Erreur lors de l'analyse IA."}
 
 if __name__ == '__main__':
-    # ... (Votre exemple d'utilisation reste le même, il appelle juste la fonction evaluate_car_ad)
+    # Test local
     example_ad = {
         "title": "Honda Civic 1.8 i-VTEC Sport, boîte auto",
         "description": "Belle Civic à vendre, faible consommation, carnet d'entretien complet. Quelques petites rayures.",
