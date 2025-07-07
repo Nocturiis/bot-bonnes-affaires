@@ -60,7 +60,7 @@ def evaluate_car_ad(title, description, price, mileage, year, model, brand, fuel
     try:
         # --- CORRECTION ICI : Appel de l'API comme dans le Quickstart ---
         chat_response = client.chat.complete(
-            model="mistral-large-latest", # Utilisez "mistral-tiny" si vous préférez pour le test/coût
+            model="mistral-tiny",
             response_format={"type": "json_object"}, # Cette option devrait fonctionner avec cette API
             messages=messages
         )
