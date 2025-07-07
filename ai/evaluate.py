@@ -1,14 +1,17 @@
 import os
 import json
-from mistralai.client import MistralClient
-from mistralai.models.chat import ChatMessage
+# --- CORRECTION ICI : Aligner avec le Quickstart ---
+from mistralai import Mistral # Importation de la classe Mistral directement
+# Plus besoin d'importer ChatMessage explicitement si on utilise des dictionnaires pour les messages
+# from mistralai.models.chat import ChatMessage # <-- Ligne à SUPPRIMER
 
 def evaluate_car_ad(title, description, price, mileage, year, model, brand, fuel_type='N/A', transmission='N/A', body_type='N/A'):
     api_key = os.environ.get("MISTRAL_API_KEY")
     if not api_key:
         raise ValueError("La variable d'environnement MISTRAL_API_KEY n'est pas définie.")
 
-    client = MistralClient(api_key=api_key) # Initialisation du client
+    # --- CORRECTION ICI : Initialisation du client comme dans le Quickstart ---
+    client = Mistral(api_key=api_key)
 
     # Nettoyer et préparer les entrées pour le prompt
     description_clean = description if description else "Aucune description fournie."
@@ -25,7 +28,7 @@ def evaluate_car_ad(title, description, price, mileage, year, model, brand, fuel
     Voici une annonce de vente de voiture d'occasion. Évalue-la selon ces critères :
     - Prix par rapport au marché pour une Honda Civic (est-il bas, normal, élevé pour ce type de véhicule et ses caractéristiques ?)
     - Clarté et complétude de l’annonce (informations manquantes, description vague ?)
-    - Risque d’arnaque (mots-clés suspects, prix irréaliste, demande urgente ?)
+    - Risque d’arnaque (mots-clés suspects, prix irréaliste, prix irréaliste, demande urgente ?)
     - Intérêt de l’affaire (potentielle bonne affaire, affaire moyenne, mauvaise affaire ?)
 
     Informations de l'annonce :
@@ -50,33 +53,28 @@ def evaluate_car_ad(title, description, price, mileage, year, model, brand, fuel
     """
 
     messages = [
-        # Utilisation de ChatMessage pour plus de robustesse avec les nouvelles versions
-        ChatMessage(role="user", content=prompt)
+        # --- CORRECTION ICI : Utilisation d'un dictionnaire simple pour le message ---
+        {"role": "user", "content": prompt}
     ]
 
     try:
-        # Revenir à client.chat.completions pour les nouvelles versions
-        chat_response = client.chat.completions.create( # Nouvelle méthode pour les versions > 0.5
-            model="mistral-tiny",
-            response_format={"type": "json_object"}, # Cette option devrait fonctionner maintenant
+        # --- CORRECTION ICI : Appel de l'API comme dans le Quickstart ---
+        chat_response = client.chat.complete(
+            model="mistral-large-latest", # Utilisez "mistral-tiny" si vous préférez pour le test/coût
+            response_format={"type": "json_object"}, # Cette option devrait fonctionner avec cette API
             messages=messages
         )
 
         content = chat_response.choices[0].message.content
-        # La bibliothèque est censée déjà valider le JSON avec response_format={"type": "json_object"}
-        # Mais on garde le json.loads() au cas où et pour avoir un dict.
         return json.loads(content)
 
-    # La gestion des exceptions est plus fine avec les nouvelles versions de la lib
     except Exception as e:
-        # Pour le débogage, imprimez l'erreur complète
         import traceback
-        traceback.print_exc() 
+        traceback.print_exc()
         print(f"Erreur lors de l'appel à l'API Mistral : {e}")
         return {"note": 0, "commentaire": "Erreur lors de l'analyse IA ou de la réponse JSON."}
 
 if __name__ == '__main__':
-    # ... (Votre bloc de test local reste inchangé) ...
     example_ad = {
         "title": "Honda Civic 1.8 i-VTEC Sport, boîte auto",
         "description": "Belle Civic à vendre, faible consommation, carnet d'entretien complet. Quelques petites rayures.",
