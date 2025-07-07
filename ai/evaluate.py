@@ -1,7 +1,7 @@
 import os
 import json
 from mistralai.client import MistralClient
-from mistralai.types.chat_completion import ChatMessage
+from mistralai.models.chat import ChatMessage
 
 def evaluate_car_ad(title, description, price, mileage, year, model, brand, fuel_type='N/A', transmission='N/A', body_type='N/A'):
     api_key = os.environ.get("MISTRAL_API_KEY")
