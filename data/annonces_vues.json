@@ -1,1 +1,18 @@
-[]
+[
+    {
+        "title": "Honda eg",
+        "price": "4500",
+        "url": "https://www.2ememain.be/v/autos/honda/m2286062237-honda-eg",
+        "description": "Honda eg 1.3 Zeer mooi basis als project auto. Interieur is in een uitzonderlijk mooie staat, en alles werkt naar behoren. Carross",
+        "year": "1995",
+        "mileage": "N/A",
+        "fuel_type": "Essence",
+        "transmission": "Boîte manuelle",
+        "body_type": "N/A",
+        "brand": "Honda",
+        "model": "Civic",
+        "city": "N/A",
+        "ai_note": 0,
+        "ai_comment": "Erreur lors de l'analyse IA."
+    }
+]
