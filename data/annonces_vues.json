@@ -430,5 +430,21 @@
         "city": "N/A",
         "ai_note": 1,
         "ai_comment": "L'annonce manque de précision sur le kilométrage, l'année et le prix est élevé pour un Honda Civic de cette époque. Le risque d'arnaque est élevé en raison du manque de précision de l'annonce et du prix irréaliste."
+    },
+    {
+        "title": "Honda Civic tourer 1.8i-vtec",
+        "price": "9500",
+        "url": "https://www.2ememain.be/v/autos/honda/m2287112728-honda-civic-tourer-1-8i-vtec",
+        "description": "Te koop: honda civic tourer bouwjaar 2014 1.8 Vtec (manueel 6bak) 135.000Km opties: airco alu velgen boordcomputer climate control",
+        "year": "2014",
+        "mileage": "135000",
+        "fuel_type": "Essence",
+        "transmission": "Boîte manuelle",
+        "body_type": "Hatchback",
+        "brand": "Honda",
+        "model": "Civic",
+        "city": "N/A",
+        "ai_note": 1,
+        "ai_comment": "Le prix de 9500 euros pour une Honda Civic Tourer de 2014 avec 135 000 km est exceptionnellement bas pour ce type de véhicule et ses caractéristiques. L'absence de certains détails importants dans l'annonce, tels que l'état général du véhicule, son histoire, ses entretiens réguliers, les dommages, les options supplémentaires et les pièces remplacées, augmente considérablement le risque d'arnaque."
     }
 ]
