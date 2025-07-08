@@ -318,5 +318,21 @@
         "city": "N/A",
         "ai_note": 1,
         "ai_comment": "Le prix est élevé pour ce type de véhicule et ses caractéristiques (10499€ pour une Honda Civic 1.4 Elegance de 2016 avec 105231 km est irréaliste). Il est également important de noter l'absence de plus d'informations sur l'état de la voiture, les options supplémentaires, les réparations récentes, etc."
+    },
+    {
+        "title": "Honda Civic 1.0 i-VTEC 126Cv AUTO Premium NAVI / CAMERA / FU",
+        "price": "22998",
+        "url": "https://www.2ememain.be/v/autos/honda/m2286713070-honda-civic-1-0-i-vtec-126cv-auto-premium-navi-camera-fu",
+        "description": "Transmission: avant  véhicule en très bon état, entièrement révisé, pas de frais ou d’entretien à prévoir.cette honda vient de pas",
+        "year": "2021",
+        "mileage": "39415",
+        "fuel_type": "Essence",
+        "transmission": "Automatique",
+        "body_type": "Berline",
+        "brand": "Honda",
+        "model": "Civic",
+        "city": "N/A",
+        "ai_note": 1,
+        "ai_comment": "Le prix est élevé pour ce type de véhicule et ses caractéristiques, il manque des détails sur l'historique du véhicule et il y a un manque de clarté dans l'annonce."
     }
 ]
