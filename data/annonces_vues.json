@@ -334,5 +334,37 @@
         "city": "N/A",
         "ai_note": 1,
         "ai_comment": "Le prix est élevé pour ce type de véhicule et ses caractéristiques, il manque des détails sur l'historique du véhicule et il y a un manque de clarté dans l'annonce."
+    },
+    {
+        "title": "Honda Civic Type R 2.0 i-VTEC NEW LIFT GPS CAMERA ACC LED FU",
+        "price": "41990",
+        "url": "https://www.2ememain.be/v/autos/honda/m2286772595-honda-civic-type-r-2-0-i-vtec-new-lift-gps-camera-acc-led-fu",
+        "description": "Honda civic 2.0 I-vtec type r 320cv navigation acc+ camera lane assist jantes 20° led sieges bacquets full options new lift garant",
+        "year": "2021",
+        "mileage": "38838",
+        "fuel_type": "Essence",
+        "transmission": "Boîte manuelle",
+        "body_type": "Berline",
+        "brand": "Honda",
+        "model": "Civic",
+        "city": "N/A",
+        "ai_note": 1,
+        "ai_comment": "Le prix de 41990€ pour une Honda Civic Type R 2021 avec 38838km est très élevé comparé au marché. De plus, l'annonce est incomplète et manque de précision sur certains points tels que la claire indication des options complémentaires."
+    },
+    {
+        "title": "Honda Civic. Essence 1400 cc. Automatique",
+        "price": "2800",
+        "url": "https://www.2ememain.be/v/autos/honda/m2286768217-honda-civic-essence-1400-cc-automatique",
+        "description": "Honda civic. 1400 Cc d'essence. Carnet d'entretien automatique de 181 000 km avec airbags et climatisation. Sélectionnez l",
+        "year": "2001",
+        "mileage": "181000",
+        "fuel_type": "Essence",
+        "transmission": "Automatique",
+        "body_type": "Hatchback",
+        "brand": "Honda",
+        "model": "Civic",
+        "city": "N/A",
+        "ai_note": 1,
+        "ai_comment": "Le prix de 2800 euros pour une Honda Civic de l'année 2001 avec 181 000 km est considéré comme irréaliste. En moyenne, le marché prévoit un prix de 4000-5000 euros pour une voiture de cette année et ce type de kilométrage. De plus, l'annonce manque de détails importants tels que l'état général du véhicule, son histoire, ses dépenses de maintenance et les photos."
     }
 ]
