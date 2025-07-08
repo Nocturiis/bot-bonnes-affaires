@@ -414,5 +414,21 @@
         "city": "N/A",
         "ai_note": 1,
         "ai_comment": "Le prix est très bas pour un Honda Civic de 1989 avec une transmission manuelle, carburant essence et une utilisation non spécifiée. De plus, il n'y a pas de détail sur le kilométrage ni sur le type de carrosserie."
+    },
+    {
+        "title": "Honda civic ed7 1616i",
+        "price": "7500",
+        "url": "https://www.2ememain.be/v/autos/honda/m2287085755-honda-civic-ed7-1616i",
+        "description": "à vendre honda civic ed7 véritable ed7 avec sont moteur d’origine d16a9 qui correspond au numéro châssis année 1989 blanche dorigi",
+        "year": "N/A",
+        "mileage": "N/A",
+        "fuel_type": "Essence",
+        "transmission": "N/A",
+        "body_type": "N/A",
+        "brand": "Honda",
+        "model": "Civic",
+        "city": "N/A",
+        "ai_note": 1,
+        "ai_comment": "L'annonce manque de précision sur le kilométrage, l'année et le prix est élevé pour un Honda Civic de cette époque. Le risque d'arnaque est élevé en raison du manque de précision de l'annonce et du prix irréaliste."
     }
 ]
