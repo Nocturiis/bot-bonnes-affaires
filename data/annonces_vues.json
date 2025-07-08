@@ -382,5 +382,37 @@
         "city": "N/A",
         "ai_note": 1,
         "ai_comment": "Le prix étant réservé, il est impossible de déterminer si le prix est bas, normal ou élevé pour ce type de véhicule. Cependant, la présence d'une caméra navi PDC et d'un black pack sur un Honda Civic 1.0I-VTEC Sport Plus de 2017 suggère que l'annonce pourrait avoir un prix plus élevé que la moyenne. L'absence de prix détourne potentiellement les clients de l'annonce."
+    },
+    {
+        "title": "Honda civic",
+        "price": "1650",
+        "url": "https://www.2ememain.be/v/autos/honda/m2287071225-honda-civic",
+        "description": "à vendre honda civic 1.4Is 🚗 boîte automatique 229.*Klm possède tout ces papier et 2 clé 🔑 tourne et roule très bien aucune fumé",
+        "year": "2001",
+        "mileage": "N/A",
+        "fuel_type": "N/A",
+        "transmission": "Automatique",
+        "body_type": "N/A",
+        "brand": "Honda",
+        "model": "Civic",
+        "city": "N/A",
+        "ai_note": 1,
+        "ai_comment": "Le prix est très bas pour un Civic de 2001 avec un kilométrage non spécifié. Il manque des informations clés tels que la condition générale, l'état de la voiture, la couleur, les options supplémentaires et la localisation. Le prix extrêmement bas pourrait être un indicateur de risque d'arnaque."
+    },
+    {
+        "title": "Honda civic ec9",
+        "price": "2500",
+        "url": "https://www.2ememain.be/v/autos/honda/m2287059802-honda-civic-ec9",
+        "description": "Honda civic ec9 1989 in goede staat te koop wegens geen gebruik of zelden ingeschreven als oldtimer auto is over 3 jaar aangepakt",
+        "year": "1989",
+        "mileage": "N/A",
+        "fuel_type": "Essence",
+        "transmission": "Boîte manuelle",
+        "body_type": "Autre carrosserie",
+        "brand": "Honda",
+        "model": "Civic",
+        "city": "N/A",
+        "ai_note": 1,
+        "ai_comment": "Le prix est très bas pour un Honda Civic de 1989 avec une transmission manuelle, carburant essence et une utilisation non spécifiée. De plus, il n'y a pas de détail sur le kilométrage ni sur le type de carrosserie."
     }
 ]
