@@ -45,6 +45,14 @@ def main():
 
         "https://www.2ememain.be/l/autos/", # All Autos (Pas récents)
 
+        # Prix
+        "https://www.2ememain.be/l/autos/#f:10882|Language:all-languages|PriceCentsTo:700000|sortBy:SORT_INDEX|sortOrder:DECREASING", # All autos <= 7000€
+        "https://www.2ememain.be/l/autos/f/essence/473/#f:10882|Language:all-languages|PriceCentsTo:700000|sortBy:SORT_INDEX|sortOrder:DECREASING", # All autos <= 7000€ Essence
+        "https://www.2ememain.be/l/autos/#f:10882|Language:all-languages|PriceCentsTo:500000|sortBy:SORT_INDEX|sortOrder:DECREASING", # All autos <= 5000€
+        "https://www.2ememain.be/l/autos/f/essence/473/#f:10882|Language:all-languages|PriceCentsTo:500000|sortBy:SORT_INDEX|sortOrder:DECREASING", # All autos <= 5000€ Essence
+        "https://www.2ememain.be/l/autos/#f:10882|Language:all-languages|PriceCentsTo:400000|sortBy:SORT_INDEX|sortOrder:DECREASING", # All autos <= 4000€
+        "https://www.2ememain.be/l/autos/f/essence/473/#f:10882|Language:all-languages|PriceCentsTo:400000|sortBy:SORT_INDEX|sortOrder:DECREASING", # All autos <= 4000€ Essence
+
         # All Autos
         "https://www.2ememain.be/l/autos/#f:10882|Language:all-languages|sortBy:SORT_INDEX|sortOrder:DECREASING",
         "https://www.2ememain.be/l/autos/#f:10882|constructionYearFrom:2015|Language:all-languages|sortBy:SORT_INDEX|sortOrder:DECREASING",
