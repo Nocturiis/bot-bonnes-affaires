@@ -25,32 +25,50 @@ def evaluate_car_ad(title, description, price, mileage, year, model, brand, fuel
     body_type_clean = f"Type de carrosserie: {body_type}" if body_type and str(body_type).strip() != 'N/A' else ""
 
     prompt = f"""
-    Voici une annonce de vente de voiture d'occasion. Évalue-la selon ces critères :
-    - Prix par rapport au marché pour une Honda Civic (est-il bas, normal, élevé pour ce type de véhicule et ses caractéristiques ?)
-    - Clarté et complétude de l’annonce (informations manquantes, description vague ?)
-    - Risque d’arnaque (mots-clés suspects, prix irréaliste, prix irréaliste, demande urgente ?)
-    - Intérêt de l’affaire (potentielle bonne affaire, affaire moyenne, mauvaise affaire ?)
+Voici une annonce de vente de voiture d'occasion. Évalue-la de manière rigoureuse selon ces critères :
 
-    Informations de l'annonce :
-    Titre: {title}
-    Description: {description_clean}
-    {price_clean}
-    {mileage_clean}
-    {year_clean}
-    {model_brand_clean}
-    {fuel_type_clean}
-    {transmission_clean}
-    {body_type_clean}
+1. **Prix par rapport au marché** : Est-il **nettement inférieur**, **dans la moyenne**, ou **trop élevé** pour un véhicule de ce type (marque, modèle, année, kilométrage, état apparent) ? Compare implicitement au prix du marché local.
+2. **Clarté et complétude de l’annonce** : L’annonce fournit-elle **toutes les infos essentielles** (entretien, nombre de propriétaires, CT, état mécanique, options, défauts éventuels) ? Y a-t-il des éléments **vagues ou absents** ?
+3. **Risque d’arnaque** : Détecte les signaux d’alerte : **prix trop beau pour être vrai**, **langage manipulateur**, **formule urgente**, **vendeur peu transparent**, **infos incohérentes**, **photos douteuses ou absentes**, etc.
+4. **Attractivité de l’affaire** : En combinant les trois critères ci-dessus, juge si c’est :
+   - une **arnaque claire** (1)
+   - une **affaire douteuse ou risquée** (2)
+   - une **offre banale ou moyenne** (3)
+   - une **bonne affaire avec légers doutes** (4)
+   - une **affaire en or, sans risque visible, sous-cotée** (5)
 
-    Note de 1 (arnaque probable / très mauvaise affaire) à 5 (excellente affaire / coup de fusil), puis justifie en 2 lignes.
-    Retourne la réponse au format JSON strict (ne mets rien d'autre que le JSON):
-    ```json
-    {{
-      "note": [1-5],
-      "commentaire": "Justification en 2 lignes."
-    }}
-    ```
-    """
+### Notation
+
+Attribue une note de 1 à 5 selon cette grille stricte :
+
+- **1 = Arnaque probable**, incohérences ou prix irréaliste, très mauvaise affaire.
+- **2 = Affaire risquée ou mauvaise**, prix trop élevé ou annonce douteuse.
+- **3 = Offre neutre ou moyenne**, prix dans la norme, pas d'intérêt particulier.
+- **4 = Bonne affaire**, légère sous-cote ou bonne transparence.
+- **5 = Affaire en or**, vendue **nettement sous le prix du marché**, **aucun signe d’arnaque**, **revente possible avec profit immédiat**.
+
+### Instructions
+
+Ne sois **pas indulgent**. **Note sévèrement** si tu n’as pas assez d'infos. **Méfie-toi par défaut**, la prudence prévaut sur l’optimisme.
+
+Annonce à évaluer :
+Titre: {title}
+Description: {description_clean}
+{price_clean}
+{mileage_clean}
+{year_clean}
+{model_brand_clean}
+{fuel_type_clean}
+{transmission_clean}
+{body_type_clean}
+
+Retourne la réponse **au format JSON strict** uniquement, sans aucune explication additionnelle :
+```json
+{{
+  "note": [1-5],
+  "commentaire": "Justification en 2 lignes."
+}}
+
 
     messages = [
         # --- CORRECTION ICI : Utilisation d'un dictionnaire simple pour le message ---
