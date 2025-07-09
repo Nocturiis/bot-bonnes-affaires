@@ -2,8 +2,8 @@ name: Détecteur de Bonnes Affaires de Voitures
 
 on:
   schedule:
-    # S'exécute toutes les heures. Ajustez au besoin (ex: '0,30 * * * *' toutes les 30 min)
-    - cron: '0 * * * *'
+    # S'exécute à 0h00, 8h00 et 16h00 (4 PM) tous les jours.
+    - cron: '0 0,8,16 * * *'
   workflow_dispatch: # Permet le déclenchement manuel depuis l'onglet GitHub Actions
 
 jobs:
