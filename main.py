@@ -152,7 +152,7 @@ def main():
     ]
 
     # Nombre de pages à scraper pour chaque URL de base
-    num_pages_per_base_url = 10 
+    num_pages_per_base_url = 5
 
     all_specific_page_urls = []
 
