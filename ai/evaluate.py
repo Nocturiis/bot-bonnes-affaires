@@ -25,50 +25,60 @@ def evaluate_car_ad(title, description, price, mileage, year, model, brand, fuel
     body_type_clean = f"Type de carrosserie: {body_type}" if body_type and str(body_type).strip() != 'N/A' else ""
 
     prompt = f"""
-Voici une annonce de vente de voiture d'occasion. Évalue-la de manière rigoureuse selon ces critères :
+Voici une annonce de vente de voiture (neuve ou d'occasion). Évalue-la avec un maximum de rigueur selon les critères suivants. L'objectif est de **déterminer si la voiture peut être revendue rapidement avec bénéfice**, ou si l'annonce cache des pièges.
 
-1. **Prix par rapport au marché** : Est-il **nettement inférieur**, **dans la moyenne**, ou **trop élevé** pour un véhicule de ce type (marque, modèle, année, kilométrage, état apparent) ? Compare implicitement au prix du marché local.
-2. **Clarté et complétude de l’annonce** : L’annonce fournit-elle **toutes les infos essentielles** (entretien, nombre de propriétaires, CT, état mécanique, options, défauts éventuels) ? Y a-t-il des éléments **vagues ou absents** ?
-3. **Risque d’arnaque** : Détecte les signaux d’alerte : **prix trop beau pour être vrai**, **langage manipulateur**, **formule urgente**, **vendeur peu transparent**, **infos incohérentes**, **photos douteuses ou absentes**, etc.
-4. **Attractivité de l’affaire** : En combinant les trois critères ci-dessus, juge si c’est :
-   - une **arnaque claire** (1)
-   - une **affaire douteuse ou risquée** (2)
-   - une **offre banale ou moyenne** (3)
-   - une **bonne affaire avec légers doutes** (4)
-   - une **affaire en or, sans risque visible, sous-cotée** (5)
+---
 
-### Notation
+### 1. **Prix vs marché local**
+Le prix demandé est-il :
+- **objectivement bien en-dessous** du prix du marché actuel (au moins 10–15% sous-coté) ?
+- **dans la norme** ?
+- **trop élevé ou surestimé**, même en cas de bon état ?
+Fais une estimation **implicite**, comme un humain expérimenté en occasion.
 
-Attribue une note de 1 à 5 selon cette grille stricte :
+### 2. **Qualité de l’annonce**
+Contient-elle **tous les éléments cruciaux** :
+- historique (propriétaires, entretiens, CT, accidents)
+- options et équipements
+- état réel et défauts signalés
+- photos nombreuses et claires
+Toute **absence d'information critique** doit être **pénalisée sévèrement**.
 
-- **1 = Arnaque probable**, incohérences ou prix irréaliste, très mauvaise affaire.
-- **2 = Affaire risquée ou mauvaise**, prix trop élevé ou annonce douteuse.
-- **3 = Offre neutre ou moyenne**, prix dans la norme, pas d'intérêt particulier.
-- **4 = Bonne affaire**, légère sous-cote ou bonne transparence.
-- **5 = Affaire en or**, vendue **nettement sous le prix du marché**, **aucun signe d’arnaque**, **revente possible avec profit immédiat**.
+### 3. **Signes de risque ou d’arnaque**
+Repère les signaux suivants :
+- prix trop bas pour être vrai
+- vendeur flou ou formulation vague ("comme neuf", "à voir", "urgent", etc.)
+- incohérences (ex : voiture neuve avec plaque étrangère)
+- données techniques imprécises ou masquées
+- import douteux ou voiture invendable localement
 
-### Instructions
+**Ne donne jamais la note maximale si un doute subsiste.**
 
-Ne sois **pas indulgent**. **Note sévèrement** si tu n’as pas assez d'infos. **Méfie-toi par défaut**, la prudence prévaut sur l’optimisme.
+---
 
-Annonce à évaluer :
-Titre: {title}
-Description: {description_clean}
-{price_clean}
-{mileage_clean}
-{year_clean}
-{model_brand_clean}
-{fuel_type_clean}
-{transmission_clean}
-{body_type_clean}
+### 4. **Synthèse – attractivité de l’affaire**
+Classe l’annonce dans cette grille **ultra stricte** :
 
-Retourne la réponse **au format JSON strict** uniquement, sans aucune explication additionnelle :
+- **1 = Arnaque probable ou prix aberrant**
+- **2 = Offre peu intéressante ou risquée**
+- **3 = Offre banale, sans gain espéré à la revente**
+- **4 = Bonne affaire possible, avec réserve**
+- **5 = Exception rare : revente quasi immédiate possible avec bénéfice (>= 10%), aucune faille détectée, vendeur clair et complet)**
+
+**⚠️ Par défaut, sois méfiant et pessimiste. Le niveau 5 doit être exceptionnel.** N’accorde cette note **que si toutes les conditions sont réunies** (prix nettement bas + infos complètes + modèle recherché + aucun risque détecté).
+
+---
+
+### Format de réponse :
+
+Retourne la réponse au **format JSON strict**, sans explication additionnelle :
+
 ```json
 {{
   "note": [1-5],
-  "commentaire": "Justification en 2 lignes."
+  "commentaire": "Synthèse en 2 phrases max. Justifie la note en restant neutre et critique."
 }}
-
+"""
 
     messages = [
         # --- CORRECTION ICI : Utilisation d'un dictionnaire simple pour le message ---

@@ -43,103 +43,111 @@ def main():
 
     base_urls_to_monitor = [
 
-        "https://www.2ememain.be/l/autos/", # All Autos (Pas récents)
+        # Seulement les récentes pour éviter le ban Github:
 
-        # Prix
-        "https://www.2ememain.be/l/autos/#f:10882|Language:all-languages|PriceCentsTo:700000|sortBy:SORT_INDEX|sortOrder:DECREASING", # All autos <= 7000€
-        "https://www.2ememain.be/l/autos/f/essence/473/#f:10882|Language:all-languages|PriceCentsTo:700000|sortBy:SORT_INDEX|sortOrder:DECREASING", # All autos <= 7000€ Essence
-        "https://www.2ememain.be/l/autos/#f:10882|Language:all-languages|PriceCentsTo:500000|sortBy:SORT_INDEX|sortOrder:DECREASING", # All autos <= 5000€
-        "https://www.2ememain.be/l/autos/f/essence/473/#f:10882|Language:all-languages|PriceCentsTo:500000|sortBy:SORT_INDEX|sortOrder:DECREASING", # All autos <= 5000€ Essence
-        "https://www.2ememain.be/l/autos/#f:10882|Language:all-languages|PriceCentsTo:400000|sortBy:SORT_INDEX|sortOrder:DECREASING", # All autos <= 4000€
-        "https://www.2ememain.be/l/autos/f/essence/473/#f:10882|Language:all-languages|PriceCentsTo:400000|sortBy:SORT_INDEX|sortOrder:DECREASING", # All autos <= 4000€ Essence
-
-        # All Autos
         "https://www.2ememain.be/l/autos/#f:10882|Language:all-languages|sortBy:SORT_INDEX|sortOrder:DECREASING",
-        "https://www.2ememain.be/l/autos/#f:10882|constructionYearFrom:2015|Language:all-languages|sortBy:SORT_INDEX|sortOrder:DECREASING",
-        "https://www.2ememain.be/l/autos/#f:10882|mileageTo:100001|Language:all-languages|sortBy:SORT_INDEX|sortOrder:DECREASING",
-        "https://www.2ememain.be/l/autos/#f:10882|mileageTo:100001|constructionYearFrom:2015|Language:all-languages|sortBy:SORT_INDEX|sortOrder:DECREASING",
-        "https://www.2ememain.be/l/autos/f/essence/473/#f:10882|Language:all-languages|sortBy:SORT_INDEX|sortOrder:DECREASING",
-        "https://www.2ememain.be/l/autos/f/essence/473/#f:10882|constructionYearFrom:2015|Language:all-languages|sortBy:SORT_INDEX|sortOrder:DECREASING",
-        "https://www.2ememain.be/l/autos/f/essence/473/#f:10882|mileageTo:100001|Language:all-languages|sortBy:SORT_INDEX|sortOrder:DECREASING",
-        "https://www.2ememain.be/l/autos/f/essence/473/#f:10882|mileageTo:100001|constructionYearFrom:2015|Language:all-languages|sortBy:SORT_INDEX|sortOrder:DECREASING",
-        "https://www.2ememain.be/l/autos/f/hybride-electrique-essence/13838/#f:10882|Language:all-languages|sortBy:SORT_INDEX|sortOrder:DECREASING",
-        "https://www.2ememain.be/l/autos/f/hybride-electrique-essence/13838/#f:10882|constructionYearFrom:2015|Language:all-languages|sortBy:SORT_INDEX|sortOrder:DECREASING",
-        "https://www.2ememain.be/l/autos/f/hybride-electrique-essence/13838/#f:10882|mileageTo:100001|Language:all-languages|sortBy:SORT_INDEX|sortOrder:DECREASING",
-        "https://www.2ememain.be/l/autos/f/hybride-electrique-essence/13838/#f:10882|mileageTo:100001|constructionYearFrom:2015|Language:all-languages|sortBy:SORT_INDEX|sortOrder:DECREASING",
+        "https://www.2ememain.be/l/autos/#f:10882|Language:all-languages|PriceCentsTo:300000|sortBy:SORT_INDEX|sortOrder:DECREASING",
+        "https://www.2ememain.be/l/autos/#f:10882|Language:all-languages|PriceCentsTo:300000|mileageTo:100001|sortBy:SORT_INDEX|sortOrder:DECREASING",
+        "https://www.2ememain.be/l/autos/f/essence/473/#f:10882,13838|Language:all-languages|PriceCentsTo:300000|mileageTo:100001|sortBy:SORT_INDEX|sortOrder:DECREASING"
 
-        # Dacia
-        "https://www.2ememain.be/l/autos/dacia/#f:10882|Language:all-languages|sortBy:SORT_INDEX|sortOrder:DECREASING",
-        "https://www.2ememain.be/l/autos/dacia/#f:10882|constructionYearFrom:2015|Language:all-languages|sortBy:SORT_INDEX|sortOrder:DECREASING",
-        "https://www.2ememain.be/l/autos/dacia/#f:10882|mileageTo:100001|Language:all-languages|sortBy:SORT_INDEX|sortOrder:DECREASING",
-        "https://www.2ememain.be/l/autos/dacia/#f:10882|mileageTo:100001|constructionYearFrom:2015|Language:all-languages|sortBy:SORT_INDEX|sortOrder:DECREASING",
-        "https://www.2ememain.be/l/autos/dacia/f/essence/473/#f:10882|Language:all-languages|sortBy:SORT_INDEX|sortOrder:DECREASING",
-        "https://www.2ememain.be/l/autos/dacia/f/essence/473/#f:10882|constructionYearFrom:2015|Language:all-languages|sortBy:SORT_INDEX|sortOrder:DECREASING",
-        "https://www.2ememain.be/l/autos/dacia/f/essence/473/#f:10882|mileageTo:100001|Language:all-languages|sortBy:SORT_INDEX|sortOrder:DECREASING",
-        "https://www.2ememain.be/l/autos/dacia/f/essence/473/#f:10882|mileageTo:100001|constructionYearFrom:2015|Language:all-languages|sortBy:SORT_INDEX|sortOrder:DECREASING",
-        "https://www.2ememain.be/l/autos/dacia/f/hybride-electrique-essence/13838/#f:10882|Language:all-languages|sortBy:SORT_INDEX|sortOrder:DECREASING",
-        "https://www.2ememain.be/l/autos/dacia/f/hybride-electrique-essence/13838/#f:10882|constructionYearFrom:2015|Language:all-languages|sortBy:SORT_INDEX|sortOrder:DECREASING",
-        "https://www.2ememain.be/l/autos/dacia/f/hybride-electrique-essence/13838/#f:10882|mileageTo:100001|Language:all-languages|sortBy:SORT_INDEX|sortOrder:DECREASING",
-        "https://www.2ememain.be/l/autos/dacia/f/hybride-electrique-essence/13838/#f:10882|mileageTo:100001|constructionYearFrom:2015|Language:all-languages|sortBy:SORT_INDEX|sortOrder:DECREASING",
 
-        # Honda
-        "https://www.2ememain.be/l/autos/honda/#f:10882|Language:all-languages|sortBy:SORT_INDEX|sortOrder:DECREASING",
-        "https://www.2ememain.be/l/autos/honda/#f:10882|constructionYearFrom:2015|Language:all-languages|sortBy:SORT_INDEX|sortOrder:DECREASING",
-        "https://www.2ememain.be/l/autos/honda/#f:10882|mileageTo:100001|Language:all-languages|sortBy:SORT_INDEX|sortOrder:DECREASING",
-        "https://www.2ememain.be/l/autos/honda/#f:10882|mileageTo:100001|constructionYearFrom:2015|Language:all-languages|sortBy:SORT_INDEX|sortOrder:DECREASING",
-        "https://www.2ememain.be/l/autos/honda/f/essence/473/#f:10882|Language:all-languages|sortBy:SORT_INDEX|sortOrder:DECREASING",
-        "https://www.2ememain.be/l/autos/honda/f/essence/473/#f:10882|constructionYearFrom:2015|Language:all-languages|sortBy:SORT_INDEX|sortOrder:DECREASING",
-        "https://www.2ememain.be/l/autos/honda/f/essence/473/#f:10882|mileageTo:100001|Language:all-languages|sortBy:SORT_INDEX|sortOrder:DECREASING",
-        "https://www.2ememain.be/l/autos/honda/f/essence/473/#f:10882|mileageTo:100001|constructionYearFrom:2015|Language:all-languages|sortBy:SORT_INDEX|sortOrder:DECREASING",
-        "https://www.2ememain.be/l/autos/honda/f/hybride-electrique-essence/13838/#f:10882|Language:all-languages|sortBy:SORT_INDEX|sortOrder:DECREASING",
-        "https://www.2ememain.be/l/autos/honda/f/hybride-electrique-essence/13838/#f:10882|constructionYearFrom:2015|Language:all-languages|sortBy:SORT_INDEX|sortOrder:DECREASING",
-        "https://www.2ememain.be/l/autos/honda/f/hybride-electrique-essence/13838/#f:10882|mileageTo:100001|Language:all-languages|sortBy:SORT_INDEX|sortOrder:DECREASING",
-        "https://www.2ememain.be/l/autos/honda/f/hybride-electrique-essence/13838/#f:10882|mileageTo:100001|constructionYearFrom:2015|Language:all-languages|sortBy:SORT_INDEX|sortOrder:DECREASING",
+        # "https://www.2ememain.be/l/autos/", # All Autos (Pas récents)
+
+        # # Prix
+        # "https://www.2ememain.be/l/autos/#f:10882|Language:all-languages|PriceCentsTo:700000|sortBy:SORT_INDEX|sortOrder:DECREASING", # All autos <= 7000€
+        # "https://www.2ememain.be/l/autos/f/essence/473/#f:10882|Language:all-languages|PriceCentsTo:700000|sortBy:SORT_INDEX|sortOrder:DECREASING", # All autos <= 7000€ Essence
+        # "https://www.2ememain.be/l/autos/#f:10882|Language:all-languages|PriceCentsTo:500000|sortBy:SORT_INDEX|sortOrder:DECREASING", # All autos <= 5000€
+        # "https://www.2ememain.be/l/autos/f/essence/473/#f:10882|Language:all-languages|PriceCentsTo:500000|sortBy:SORT_INDEX|sortOrder:DECREASING", # All autos <= 5000€ Essence
+        # "https://www.2ememain.be/l/autos/#f:10882|Language:all-languages|PriceCentsTo:400000|sortBy:SORT_INDEX|sortOrder:DECREASING", # All autos <= 4000€
+        # "https://www.2ememain.be/l/autos/f/essence/473/#f:10882|Language:all-languages|PriceCentsTo:400000|sortBy:SORT_INDEX|sortOrder:DECREASING", # All autos <= 4000€ Essence
+
+        # # All Autos
+        # "https://www.2ememain.be/l/autos/#f:10882|Language:all-languages|sortBy:SORT_INDEX|sortOrder:DECREASING",
+        # "https://www.2ememain.be/l/autos/#f:10882|constructionYearFrom:2015|Language:all-languages|sortBy:SORT_INDEX|sortOrder:DECREASING",
+        # "https://www.2ememain.be/l/autos/#f:10882|mileageTo:100001|Language:all-languages|sortBy:SORT_INDEX|sortOrder:DECREASING",
+        # "https://www.2ememain.be/l/autos/#f:10882|mileageTo:100001|constructionYearFrom:2015|Language:all-languages|sortBy:SORT_INDEX|sortOrder:DECREASING",
+        # "https://www.2ememain.be/l/autos/f/essence/473/#f:10882|Language:all-languages|sortBy:SORT_INDEX|sortOrder:DECREASING",
+        # "https://www.2ememain.be/l/autos/f/essence/473/#f:10882|constructionYearFrom:2015|Language:all-languages|sortBy:SORT_INDEX|sortOrder:DECREASING",
+        # "https://www.2ememain.be/l/autos/f/essence/473/#f:10882|mileageTo:100001|Language:all-languages|sortBy:SORT_INDEX|sortOrder:DECREASING",
+        # "https://www.2ememain.be/l/autos/f/essence/473/#f:10882|mileageTo:100001|constructionYearFrom:2015|Language:all-languages|sortBy:SORT_INDEX|sortOrder:DECREASING",
+        # "https://www.2ememain.be/l/autos/f/hybride-electrique-essence/13838/#f:10882|Language:all-languages|sortBy:SORT_INDEX|sortOrder:DECREASING",
+        # "https://www.2ememain.be/l/autos/f/hybride-electrique-essence/13838/#f:10882|constructionYearFrom:2015|Language:all-languages|sortBy:SORT_INDEX|sortOrder:DECREASING",
+        # "https://www.2ememain.be/l/autos/f/hybride-electrique-essence/13838/#f:10882|mileageTo:100001|Language:all-languages|sortBy:SORT_INDEX|sortOrder:DECREASING",
+        # "https://www.2ememain.be/l/autos/f/hybride-electrique-essence/13838/#f:10882|mileageTo:100001|constructionYearFrom:2015|Language:all-languages|sortBy:SORT_INDEX|sortOrder:DECREASING",
+
+        # # Dacia
+        # "https://www.2ememain.be/l/autos/dacia/#f:10882|Language:all-languages|sortBy:SORT_INDEX|sortOrder:DECREASING",
+        # "https://www.2ememain.be/l/autos/dacia/#f:10882|constructionYearFrom:2015|Language:all-languages|sortBy:SORT_INDEX|sortOrder:DECREASING",
+        # "https://www.2ememain.be/l/autos/dacia/#f:10882|mileageTo:100001|Language:all-languages|sortBy:SORT_INDEX|sortOrder:DECREASING",
+        # "https://www.2ememain.be/l/autos/dacia/#f:10882|mileageTo:100001|constructionYearFrom:2015|Language:all-languages|sortBy:SORT_INDEX|sortOrder:DECREASING",
+        # "https://www.2ememain.be/l/autos/dacia/f/essence/473/#f:10882|Language:all-languages|sortBy:SORT_INDEX|sortOrder:DECREASING",
+        # "https://www.2ememain.be/l/autos/dacia/f/essence/473/#f:10882|constructionYearFrom:2015|Language:all-languages|sortBy:SORT_INDEX|sortOrder:DECREASING",
+        # "https://www.2ememain.be/l/autos/dacia/f/essence/473/#f:10882|mileageTo:100001|Language:all-languages|sortBy:SORT_INDEX|sortOrder:DECREASING",
+        # "https://www.2ememain.be/l/autos/dacia/f/essence/473/#f:10882|mileageTo:100001|constructionYearFrom:2015|Language:all-languages|sortBy:SORT_INDEX|sortOrder:DECREASING",
+        # "https://www.2ememain.be/l/autos/dacia/f/hybride-electrique-essence/13838/#f:10882|Language:all-languages|sortBy:SORT_INDEX|sortOrder:DECREASING",
+        # "https://www.2ememain.be/l/autos/dacia/f/hybride-electrique-essence/13838/#f:10882|constructionYearFrom:2015|Language:all-languages|sortBy:SORT_INDEX|sortOrder:DECREASING",
+        # "https://www.2ememain.be/l/autos/dacia/f/hybride-electrique-essence/13838/#f:10882|mileageTo:100001|Language:all-languages|sortBy:SORT_INDEX|sortOrder:DECREASING",
+        # "https://www.2ememain.be/l/autos/dacia/f/hybride-electrique-essence/13838/#f:10882|mileageTo:100001|constructionYearFrom:2015|Language:all-languages|sortBy:SORT_INDEX|sortOrder:DECREASING",
+
+        # # Honda
+        # "https://www.2ememain.be/l/autos/honda/#f:10882|Language:all-languages|sortBy:SORT_INDEX|sortOrder:DECREASING",
+        # "https://www.2ememain.be/l/autos/honda/#f:10882|constructionYearFrom:2015|Language:all-languages|sortBy:SORT_INDEX|sortOrder:DECREASING",
+        # "https://www.2ememain.be/l/autos/honda/#f:10882|mileageTo:100001|Language:all-languages|sortBy:SORT_INDEX|sortOrder:DECREASING",
+        # "https://www.2ememain.be/l/autos/honda/#f:10882|mileageTo:100001|constructionYearFrom:2015|Language:all-languages|sortBy:SORT_INDEX|sortOrder:DECREASING",
+        # "https://www.2ememain.be/l/autos/honda/f/essence/473/#f:10882|Language:all-languages|sortBy:SORT_INDEX|sortOrder:DECREASING",
+        # "https://www.2ememain.be/l/autos/honda/f/essence/473/#f:10882|constructionYearFrom:2015|Language:all-languages|sortBy:SORT_INDEX|sortOrder:DECREASING",
+        # "https://www.2ememain.be/l/autos/honda/f/essence/473/#f:10882|mileageTo:100001|Language:all-languages|sortBy:SORT_INDEX|sortOrder:DECREASING",
+        # "https://www.2ememain.be/l/autos/honda/f/essence/473/#f:10882|mileageTo:100001|constructionYearFrom:2015|Language:all-languages|sortBy:SORT_INDEX|sortOrder:DECREASING",
+        # "https://www.2ememain.be/l/autos/honda/f/hybride-electrique-essence/13838/#f:10882|Language:all-languages|sortBy:SORT_INDEX|sortOrder:DECREASING",
+        # "https://www.2ememain.be/l/autos/honda/f/hybride-electrique-essence/13838/#f:10882|constructionYearFrom:2015|Language:all-languages|sortBy:SORT_INDEX|sortOrder:DECREASING",
+        # "https://www.2ememain.be/l/autos/honda/f/hybride-electrique-essence/13838/#f:10882|mileageTo:100001|Language:all-languages|sortBy:SORT_INDEX|sortOrder:DECREASING",
+        # "https://www.2ememain.be/l/autos/honda/f/hybride-electrique-essence/13838/#f:10882|mileageTo:100001|constructionYearFrom:2015|Language:all-languages|sortBy:SORT_INDEX|sortOrder:DECREASING",
         
-        # Renault
-        "https://www.2ememain.be/l/autos/renault/#f:10882|Language:all-languages|sortBy:SORT_INDEX|sortOrder:DECREASING",
-        "https://www.2ememain.be/l/autos/renault/#f:10882|constructionYearFrom:2015|Language:all-languages|sortBy:SORT_INDEX|sortOrder:DECREASING",
-        "https://www.2ememain.be/l/autos/renault/#f:10882|mileageTo:100001|Language:all-languages|sortBy:SORT_INDEX|sortOrder:DECREASING",
-        "https://www.2ememain.be/l/autos/renault/#f:10882|mileageTo:100001|constructionYearFrom:2015|Language:all-languages|sortBy:SORT_INDEX|sortOrder:DECREASING",
-        "https://www.2ememain.be/l/autos/renault/f/essence/473/#f:10882|Language:all-languages|sortBy:SORT_INDEX|sortOrder:DECREASING",
-        "https://www.2ememain.be/l/autos/renault/f/essence/473/#f:10882|constructionYearFrom:2015|Language:all-languages|sortBy:SORT_INDEX|sortOrder:DECREASING",
-        "https://www.2ememain.be/l/autos/renault/f/essence/473/#f:10882|mileageTo:100001|Language:all-languages|sortBy:SORT_INDEX|sortOrder:DECREASING",
-        "https://www.2ememain.be/l/autos/renault/f/essence/473/#f:10882|mileageTo:100001|constructionYearFrom:2015|Language:all-languages|sortBy:SORT_INDEX|sortOrder:DECREASING",
-        "https://www.2ememain.be/l/autos/renault/f/hybride-electrique-essence/13838/#f:10882|Language:all-languages|sortBy:SORT_INDEX|sortOrder:DECREASING",
-        "https://www.2ememain.be/l/autos/renault/f/hybride-electrique-essence/13838/#f:10882|constructionYearFrom:2015|Language:all-languages|sortBy:SORT_INDEX|sortOrder:DECREASING",
-        "https://www.2ememain.be/l/autos/renault/f/hybride-electrique-essence/13838/#f:10882|mileageTo:100001|Language:all-languages|sortBy:SORT_INDEX|sortOrder:DECREASING",
-        "https://www.2ememain.be/l/autos/renault/f/hybride-electrique-essence/13838/#f:10882|mileageTo:100001|constructionYearFrom:2015|Language:all-languages|sortBy:SORT_INDEX|sortOrder:DECREASING",
+        # # Renault
+        # "https://www.2ememain.be/l/autos/renault/#f:10882|Language:all-languages|sortBy:SORT_INDEX|sortOrder:DECREASING",
+        # "https://www.2ememain.be/l/autos/renault/#f:10882|constructionYearFrom:2015|Language:all-languages|sortBy:SORT_INDEX|sortOrder:DECREASING",
+        # "https://www.2ememain.be/l/autos/renault/#f:10882|mileageTo:100001|Language:all-languages|sortBy:SORT_INDEX|sortOrder:DECREASING",
+        # "https://www.2ememain.be/l/autos/renault/#f:10882|mileageTo:100001|constructionYearFrom:2015|Language:all-languages|sortBy:SORT_INDEX|sortOrder:DECREASING",
+        # "https://www.2ememain.be/l/autos/renault/f/essence/473/#f:10882|Language:all-languages|sortBy:SORT_INDEX|sortOrder:DECREASING",
+        # "https://www.2ememain.be/l/autos/renault/f/essence/473/#f:10882|constructionYearFrom:2015|Language:all-languages|sortBy:SORT_INDEX|sortOrder:DECREASING",
+        # "https://www.2ememain.be/l/autos/renault/f/essence/473/#f:10882|mileageTo:100001|Language:all-languages|sortBy:SORT_INDEX|sortOrder:DECREASING",
+        # "https://www.2ememain.be/l/autos/renault/f/essence/473/#f:10882|mileageTo:100001|constructionYearFrom:2015|Language:all-languages|sortBy:SORT_INDEX|sortOrder:DECREASING",
+        # "https://www.2ememain.be/l/autos/renault/f/hybride-electrique-essence/13838/#f:10882|Language:all-languages|sortBy:SORT_INDEX|sortOrder:DECREASING",
+        # "https://www.2ememain.be/l/autos/renault/f/hybride-electrique-essence/13838/#f:10882|constructionYearFrom:2015|Language:all-languages|sortBy:SORT_INDEX|sortOrder:DECREASING",
+        # "https://www.2ememain.be/l/autos/renault/f/hybride-electrique-essence/13838/#f:10882|mileageTo:100001|Language:all-languages|sortBy:SORT_INDEX|sortOrder:DECREASING",
+        # "https://www.2ememain.be/l/autos/renault/f/hybride-electrique-essence/13838/#f:10882|mileageTo:100001|constructionYearFrom:2015|Language:all-languages|sortBy:SORT_INDEX|sortOrder:DECREASING",
 
-        # Toyota
-        "https://www.2ememain.be/l/autos/toyota/#f:10882|Language:all-languages|sortBy:SORT_INDEX|sortOrder:DECREASING",
-        "https://www.2ememain.be/l/autos/toyota/#f:10882|constructionYearFrom:2015|Language:all-languages|sortBy:SORT_INDEX|sortOrder:DECREASING",
-        "https://www.2ememain.be/l/autos/toyota/#f:10882|mileageTo:100001|Language:all-languages|sortBy:SORT_INDEX|sortOrder:DECREASING",
-        "https://www.2ememain.be/l/autos/toyota/#f:10882|mileageTo:100001|constructionYearFrom:2015|Language:all-languages|sortBy:SORT_INDEX|sortOrder:DECREASING",
-        "https://www.2ememain.be/l/autos/toyota/f/essence/473/#f:10882|Language:all-languages|sortBy:SORT_INDEX|sortOrder:DECREASING",
-        "https://www.2ememain.be/l/autos/toyota/f/essence/473/#f:10882|constructionYearFrom:2015|Language:all-languages|sortBy:SORT_INDEX|sortOrder:DECREASING",
-        "https://www.2ememain.be/l/autos/toyota/f/essence/473/#f:10882|mileageTo:100001|Language:all-languages|sortBy:SORT_INDEX|sortOrder:DECREASING",
-        "https://www.2ememain.be/l/autos/toyota/f/essence/473/#f:10882|mileageTo:100001|constructionYearFrom:2015|Language:all-languages|sortBy:SORT_INDEX|sortOrder:DECREASING",
-        "https://www.2ememain.be/l/autos/toyota/f/hybride-electrique-essence/13838/#f:10882|Language:all-languages|sortBy:SORT_INDEX|sortOrder:DECREASING",
-        "https://www.2ememain.be/l/autos/toyota/f/hybride-electrique-essence/13838/#f:10882|constructionYearFrom:2015|Language:all-languages|sortBy:SORT_INDEX|sortOrder:DECREASING",
-        "https://www.2ememain.be/l/autos/toyota/f/hybride-electrique-essence/13838/#f:10882|mileageTo:100001|Language:all-languages|sortBy:SORT_INDEX|sortOrder:DECREASING",
-        "https://www.2ememain.be/l/autos/toyota/f/hybride-electrique-essence/13838/#f:10882|mileageTo:100001|constructionYearFrom:2015|Language:all-languages|sortBy:SORT_INDEX|sortOrder:DECREASING",
+        # # Toyota
+        # "https://www.2ememain.be/l/autos/toyota/#f:10882|Language:all-languages|sortBy:SORT_INDEX|sortOrder:DECREASING",
+        # "https://www.2ememain.be/l/autos/toyota/#f:10882|constructionYearFrom:2015|Language:all-languages|sortBy:SORT_INDEX|sortOrder:DECREASING",
+        # "https://www.2ememain.be/l/autos/toyota/#f:10882|mileageTo:100001|Language:all-languages|sortBy:SORT_INDEX|sortOrder:DECREASING",
+        # "https://www.2ememain.be/l/autos/toyota/#f:10882|mileageTo:100001|constructionYearFrom:2015|Language:all-languages|sortBy:SORT_INDEX|sortOrder:DECREASING",
+        # "https://www.2ememain.be/l/autos/toyota/f/essence/473/#f:10882|Language:all-languages|sortBy:SORT_INDEX|sortOrder:DECREASING",
+        # "https://www.2ememain.be/l/autos/toyota/f/essence/473/#f:10882|constructionYearFrom:2015|Language:all-languages|sortBy:SORT_INDEX|sortOrder:DECREASING",
+        # "https://www.2ememain.be/l/autos/toyota/f/essence/473/#f:10882|mileageTo:100001|Language:all-languages|sortBy:SORT_INDEX|sortOrder:DECREASING",
+        # "https://www.2ememain.be/l/autos/toyota/f/essence/473/#f:10882|mileageTo:100001|constructionYearFrom:2015|Language:all-languages|sortBy:SORT_INDEX|sortOrder:DECREASING",
+        # "https://www.2ememain.be/l/autos/toyota/f/hybride-electrique-essence/13838/#f:10882|Language:all-languages|sortBy:SORT_INDEX|sortOrder:DECREASING",
+        # "https://www.2ememain.be/l/autos/toyota/f/hybride-electrique-essence/13838/#f:10882|constructionYearFrom:2015|Language:all-languages|sortBy:SORT_INDEX|sortOrder:DECREASING",
+        # "https://www.2ememain.be/l/autos/toyota/f/hybride-electrique-essence/13838/#f:10882|mileageTo:100001|Language:all-languages|sortBy:SORT_INDEX|sortOrder:DECREASING",
+        # "https://www.2ememain.be/l/autos/toyota/f/hybride-electrique-essence/13838/#f:10882|mileageTo:100001|constructionYearFrom:2015|Language:all-languages|sortBy:SORT_INDEX|sortOrder:DECREASING",
         
-        # VW
-        "https://www.2ememain.be/l/autos/volkswagen/#f:10882|Language:all-languages|sortBy:SORT_INDEX|sortOrder:DECREASING",
-        "https://www.2ememain.be/l/autos/volkswagen/#f:10882|constructionYearFrom:2015|Language:all-languages|sortBy:SORT_INDEX|sortOrder:DECREASING",
-        "https://www.2ememain.be/l/autos/volkswagen/#f:10882|mileageTo:100001|Language:all-languages|sortBy:SORT_INDEX|sortOrder:DECREASING",
-        "https://www.2ememain.be/l/autos/volkswagen/#f:10882|mileageTo:100001|constructionYearFrom:2015|Language:all-languages|sortBy:SORT_INDEX|sortOrder:DECREASING",
-        "https://www.2ememain.be/l/autos/volkswagen/f/essence/473/#f:10882|Language:all-languages|sortBy:SORT_INDEX|sortOrder:DECREASING",
-        "https://www.2ememain.be/l/autos/volkswagen/f/essence/473/#f:10882|constructionYearFrom:2015|Language:all-languages|sortBy:SORT_INDEX|sortOrder:DECREASING",
-        "https://www.2ememain.be/l/autos/volkswagen/f/essence/473/#f:10882|mileageTo:100001|Language:all-languages|sortBy:SORT_INDEX|sortOrder:DECREASING",
-        "https://www.2ememain.be/l/autos/volkswagen/f/essence/473/#f:10882|mileageTo:100001|constructionYearFrom:2015|Language:all-languages|sortBy:SORT_INDEX|sortOrder:DECREASING",
-        "https://www.2ememain.be/l/autos/volkswagen/f/hybride-electrique-essence/13838/#f:10882|Language:all-languages|sortBy:SORT_INDEX|sortOrder:DECREASING",
-        "https://www.2ememain.be/l/autos/volkswagen/f/hybride-electrique-essence/13838/#f:10882|constructionYearFrom:2015|Language:all-languages|sortBy:SORT_INDEX|sortOrder:DECREASING",
-        "https://www.2ememain.be/l/autos/volkswagen/f/hybride-electrique-essence/13838/#f:10882|mileageTo:100001|Language:all-languages|sortBy:SORT_INDEX|sortOrder:DECREASING",
-        "https://www.2ememain.be/l/autos/volkswagen/f/hybride-electrique-essence/13838/#f:10882|mileageTo:100001|constructionYearFrom:2015|Language:all-languages|sortBy:SORT_INDEX|sortOrder:DECREASING",
+        # # VW
+        # "https://www.2ememain.be/l/autos/volkswagen/#f:10882|Language:all-languages|sortBy:SORT_INDEX|sortOrder:DECREASING",
+        # "https://www.2ememain.be/l/autos/volkswagen/#f:10882|constructionYearFrom:2015|Language:all-languages|sortBy:SORT_INDEX|sortOrder:DECREASING",
+        # "https://www.2ememain.be/l/autos/volkswagen/#f:10882|mileageTo:100001|Language:all-languages|sortBy:SORT_INDEX|sortOrder:DECREASING",
+        # "https://www.2ememain.be/l/autos/volkswagen/#f:10882|mileageTo:100001|constructionYearFrom:2015|Language:all-languages|sortBy:SORT_INDEX|sortOrder:DECREASING",
+        # "https://www.2ememain.be/l/autos/volkswagen/f/essence/473/#f:10882|Language:all-languages|sortBy:SORT_INDEX|sortOrder:DECREASING",
+        # "https://www.2ememain.be/l/autos/volkswagen/f/essence/473/#f:10882|constructionYearFrom:2015|Language:all-languages|sortBy:SORT_INDEX|sortOrder:DECREASING",
+        # "https://www.2ememain.be/l/autos/volkswagen/f/essence/473/#f:10882|mileageTo:100001|Language:all-languages|sortBy:SORT_INDEX|sortOrder:DECREASING",
+        # "https://www.2ememain.be/l/autos/volkswagen/f/essence/473/#f:10882|mileageTo:100001|constructionYearFrom:2015|Language:all-languages|sortBy:SORT_INDEX|sortOrder:DECREASING",
+        # "https://www.2ememain.be/l/autos/volkswagen/f/hybride-electrique-essence/13838/#f:10882|Language:all-languages|sortBy:SORT_INDEX|sortOrder:DECREASING",
+        # "https://www.2ememain.be/l/autos/volkswagen/f/hybride-electrique-essence/13838/#f:10882|constructionYearFrom:2015|Language:all-languages|sortBy:SORT_INDEX|sortOrder:DECREASING",
+        # "https://www.2ememain.be/l/autos/volkswagen/f/hybride-electrique-essence/13838/#f:10882|mileageTo:100001|Language:all-languages|sortBy:SORT_INDEX|sortOrder:DECREASING",
+        # "https://www.2ememain.be/l/autos/volkswagen/f/hybride-electrique-essence/13838/#f:10882|mileageTo:100001|constructionYearFrom:2015|Language:all-languages|sortBy:SORT_INDEX|sortOrder:DECREASING",
 
-        # Modèles:
-        "https://www.2ememain.be/l/autos/honda/f/civic/811/", # Honda Civic (Pas récents)
-        "https://www.2ememain.be/l/autos/honda/f/civic/811/#Language:all-languages|sortBy:SORT_INDEX|sortOrder:DECREASING0", # Honda Civic (Pas récents)
+        # # Modèles:
+        # "https://www.2ememain.be/l/autos/honda/f/civic/811/", # Honda Civic (Pas récents)
+        # "https://www.2ememain.be/l/autos/honda/f/civic/811/#Language:all-languages|sortBy:SORT_INDEX|sortOrder:DECREASING0", # Honda Civic (Pas récents)
 
     ]
 
